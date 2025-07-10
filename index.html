@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Parking Igra - Finalna Ugođena Verzija</title>
+    <title>Parking Igra - Finalna Pozicija</title>
     <!-- Import the Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -209,7 +209,6 @@
                 options: { width: canvasWidth, height: canvasHeight, wireframes: false, background: '#e0e5ec' }
             });
 
-            // NOVO: Malo manji automobili
             const carWidth = 38, carHeight = 76;
             
             const parkingGap = (level === 3) ? 15 : 25;
@@ -226,7 +225,8 @@
                 isStatic: true, render: { fillStyle: '#95a5a6' }
             });
             
-            const carInitialY = canvasHeight * 0.4;
+            // NOVO: Početna pozicija auta je bliže dnu
+            const carInitialY = canvasHeight * 0.56;
             const carInitialX = (level === 1 || level === 3) ? canvasWidth * 0.25 : canvasWidth * 0.75;
             const carInitialAngle = (level === 1 || level === 3) ? Math.PI / 2 : -Math.PI / 2;
 
@@ -295,7 +295,7 @@
         function drawCarDetails() {
             const ctx = render.context;
             const pos = car.position; const angle = car.angle;
-            const carWidth = 38, carHeight = 76; // Koristi nove, manje dimenzije
+            const carWidth = 38, carHeight = 76;
             ctx.save(); ctx.translate(pos.x, pos.y); ctx.rotate(angle);
             ctx.fillStyle = gameOver ? '#a04040' : '#e74c3c';
             ctx.fillRect(-carWidth / 2, -carHeight / 2, carWidth, carHeight);
@@ -369,7 +369,6 @@
             
             if (isWin) {
                 const elapsedTime = (Date.now() - startTime) / 1000;
-                // NOVO: Logika za ocjene
                 let stars = 0;
                 if (elapsedTime <= 15) stars = 5;
                 else if (elapsedTime <= 20) stars = 4;
